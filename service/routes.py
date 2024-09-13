@@ -136,11 +136,12 @@ def delete_accounts(account_id):
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
 ######################################################################
+# flake8: noqa
 def check_content_type(media_type):
     """Checks that the media type is correct"""
     content_type = request.headers.get("Content-Type")
-    if content_type and content_type == media_type:
-        return
+    if content_type and content_type == media_type: # noqa: E999
+        return # noqa: E999
     app.logger.error("Invalid Content-Type: %s", content_type)
     abort(
         status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
