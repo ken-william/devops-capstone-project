@@ -9,6 +9,19 @@ spec:
     - name: message
       description: The message to echo
       type: string
+    - name: build
+      workspaces:
+        - name: source
+          workspace: pipeline-workspace
+      taskRef:
+        name: buildah
+        kind: ClusterTask
+      params:
+      - name: IMAGE
+        value: "$(params.build-image)"
+      runAfter:
+        - tests
+        - lint
   steps:
     - name: echo-message
       image: alpine:3
